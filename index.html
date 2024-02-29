@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Assignment 1 - Bailey Silberstein</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS Assignment 1 - Bailey Silberstein 000365720</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.19/"></script>
+
+  <script>
+    require([
+     "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/Sketch",
+      //"esri/layers/GraphicsLayer",
+      "esri/views/SceneView",
+      "esri/widgets/Home"
+    ], function (esriConfig ,Map, MapView, Sketch, GraphicsLayer, Home, SceneView) {
+
+      esriConfig.apiKey = "<AAPKb58d5ed1afe240039a2d21a21007e5f1f8YeGAiVR073ryM8lVj0aI661PawiSaykmtC8pOvxmn1kqqdmKDE8idhst4f80xT>";
+      const graphicsLayer = new GraphicsLayer();
+      const map = new Map({
+        basemap: "dark-gray" // Basemap layer
+      });
+
+      const view = new MapView({
+        map: map,
+        center: [-79.81, 43.32],
+        zoom: 13, // scale: 72223.819286
+        container: "viewDiv",
+        constraints: {
+          snapToZoom: false
+        }
+        
+      });
+      
+            view.when(() => {
+        const sketch = new Sketch({
+          layer: graphicsLayer,
+          view: view,
+          // graphic will be selected as soon as it is created
+          creationMode: "update"
+        });
+
+        view.ui.add(sketch, "top-right");
+
+              const homeBtn = new Home({
+          view: view
+        });
+
+        // Add the home button to the top left corner of the view
+              //Home button returns you to the starting position the map loaded to, in this case Burlington.
+        view.ui.add(homeBtn, "top-left");
+
+      });
+     let homeWidget = new Home({
+  view: view
+      });
+
+    });
+  </script>
+  
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
+<!-- partial -->
+  
+</body>
+</html>
